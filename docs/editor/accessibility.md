@@ -4,7 +4,7 @@ Area: editor
 TOCTitle: Accessibility
 ContentId: 62894B41-CC33-400A-8A56-8C761C77B4C7
 PageTitle: Accessibility in Visual Studio Code
-DateApproved: 12/7/2023
+DateApproved: 02/28/2024
 MetaDescription: Visual Studio Code user accessibility features.  Learn here about the various ways VS Code aids user accessibility.
 ---
 # Accessibility
@@ -26,6 +26,14 @@ You can adjust the zoom level in VS Code with the **View** > **Appearance** > **
 ### Persisted zoom level
 
 When you adjust the zoom level with the **View** > **Zoom In / Out** commands, the zoom level is persisted in the `window.zoomLevel` [setting](/docs/getstarted/settings.md). The default value is 0 and each increment/decrement changes the zoom level by 20 percent.
+
+## Accessibility help
+
+The command **Open Accessibility Help** `kb(editor.action.accessibilityHelp)` opens a help menu based on the current context. It currently applies to the editor, terminal, notebook, chat view, and inline chat features.
+
+You can dismiss the accessibility help menu or open additional documentation from within the help menu.
+
+![When triggered in an editor, a dialog appears that explains how to enable screen reader mode explicitly, tab focus mode and other details](images/accessibility/status.png)
 
 ## High Contrast theme
 
@@ -154,14 +162,6 @@ When suggestions pop up, they are announced to screen readers. Navigate the sugg
 
 In the diff view pane, the **Go to Next/Previous Difference** actions (`kb(editor.action.accessibleDiffViewer.next)` and `kb(editor.action.accessibleDiffViewer.prev)`) will show the Accessible Diff Viewer with diffs presented in a unified patch format. Navigate through the unchanged, inserted, or deleted lines with `kbstyle(Up)` and `kbstyle(Down)`. Press `kbstyle(Enter)` to return focus to the modified pane of the diff editor at the selected line number (or the closest line number that still exists, if a deleted line is selected). Use `kbstyle(Escape)` or `kbstyle(Shift+Escape)` to dismiss the Accessible Diff Viewer.
 
-## Accessibility help
-
-The command **Open Accessibility Help** `kb(editor.action.accessibilityHelp)` opens a help menu based on the current context. It currently applies to the editor, terminal, notebook, chat view, and inline chat features.
-
-You can dismiss the accessibility help menu or open additional documentation from within the help menu.
-
-![When triggered in an editor, a dialog appears that explains how to enable screen reader mode explicitly, tab focus mode and other details](images/accessibility/status.png)
-
 ## Accessible View
 
 Run the command **Open Accessible View** `kb(editor.action.accessibleView)` to display an Accessible View to inspect content character by character, line by line. The Accessible View is currently available for hovers, notifications, Jupyter notebook output, and chat responses.
@@ -214,13 +214,15 @@ The VS Code debugger UI is user accessible and has the following features:
 * Debug hover is keyboard accessible (`kb(editor.action.showHover)`).
 * Keyboard shortcuts can be created to set focus to each debugger area.
 
-## Audio Cues
+## Accessibility Signals
 
-Audio cues indicate if the current line has certain markers such as: errors, warnings, breakpoints, folded text regions or inline suggestions.
+Accessibility signals indicate if the current line has certain markers such as: errors, warnings, breakpoints, folded text regions or inline suggestions.
 
-They are played when the primary cursor changes its line or the first time a marker is added to the current line. Audio cues are enabled automatically when a screen reader is attached, but can also be controlled by the settings `audioCues.*`.
+They are played when the primary cursor changes its line or the first time a marker is added to the current line. Accessibility Signal sounds and announcements may be enabled automatically when a screen reader is attached and can be controlled by the settings `accessibility.signals.*`.
 
-The command **Help: List Audio Cues** lists all available audio cues, lets you hear each audio cue as you move through the list, and review which cues are currently enabled.
+The command **Help: List Signal Sounds** lists all available sounds, lets you hear each as you move through the list, and allows for configuring their enabled/disabled status.
+
+Aria announcements also inform screen reader and braille users that certain markers have been hit. The command **Help: List Signal Announcements** informs the user of which are available and allows for configuring their enabled/disabled status.
 
 ## Hover accessibility
 

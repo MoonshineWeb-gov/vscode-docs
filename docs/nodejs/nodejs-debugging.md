@@ -4,7 +4,7 @@ Area: nodejs
 TOCTitle: Node.js Debugging
 ContentId: 3AC4DBB5-1469-47FD-9CC2-6C94684D4A9D
 PageTitle: Debug Node.js Apps using Visual Studio Code
-DateApproved: 12/7/2023
+DateApproved: 02/28/2024
 MetaDescription: The Visual Studio Code editor includes Node.js debugging support. Set breakpoints, step-in, inspect variables and more.
 MetaSocialImage: /assets/docs/editor/debugging/Debugging.png
 ---
@@ -558,6 +558,14 @@ Some examples:
 * `10` same as `>=10`
 * `%2` break on every other hit
 
+### Triggered breakpoints
+
+A trigged breakpoint is a breakpoint that is automatically enabled once another breakpoint is hit. They can be very useful when diagnosing failure cases in code that happen only after a certain precondition.
+
+Triggered breakpoints can be set by right-clicking on the glyph margin, selecting **Add Triggered Breakpoint**, and then choosing which other breakpoint enables the breakpoint.
+
+<video src="../editor/images/debugging/debug-triggered-breakpoint.mp4" autoplay loop controls muted></video>
+
 ### Breakpoint validation
 
 For performance reasons, Node.js parses the functions inside JavaScript files lazily on first access. As a consequence, breakpoints don't work in source code areas that haven't been seen (parsed) by Node.js.
@@ -633,7 +641,7 @@ The JavaScript debugger can debug code compiled into WebAssembly if it includes 
 * [Zig](https://ziglang.org/): DWARF information is automatically emittted in the "Debug" build mode.
 * [Rust](https://www.rust-lang.org/): Rust emits DWARF debug information. However, wasm-pack [does not yet](https://github.com/rustwasm/wasm-pack/issues/1351) retain it during the build. So, instead of running `wasm-pack build`, users of the common wasm-bindgen/wasm-pack libraries should build manually build using two commands:
   1. `cargo install wasm-bindgen-cli` once to install the necessary command-line tool.
-  1. `cargo build --target wasm32-unknown-unkown` to build your library.
+  1. `cargo build --target wasm32-unknown-unknown` to build your library.
   1. `wasm-bindgen --keep-debug --out-dir pkg ./target/wasm32-unknown-unknown/debug/<library-name>.wasm <extra-arguments>` to generate the WebAssembly bindings, replacing `<library-name>` with the name from your Cargo.toml and configuring `<extra-arguments>` as necessary.
 
 After you have your code built, you'll want to install the [WebAssembly DWARF Debugging](https://marketplace.visualstudio.com/items?itemName=ms-vscode.wasm-dwarf-debugging) extension. This is shipped as a separate extension in order to keep the VS Code core 'streamlined.' Once installed, restart any active debugging sessions, and native code should then be mapped in the debugger! You should see your source code appear in the **Loaded Sources** view, and breakpoints should work.
